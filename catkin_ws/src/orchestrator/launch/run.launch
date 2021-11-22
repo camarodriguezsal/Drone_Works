@@ -1,0 +1,14 @@
+
+<launch>
+
+  <param name="model_save_path" value="$(find trainer)/trained_models/rl_quadrotor"/>
+  <param name="checkpoint_log_path" value="$(find trainer)/trained_models/sac_midmodels"/>
+  <param name="tensorboard_log_path" value="$(find trainer)/tensorboard_log_dir"/>
+  <param name="eval_log_path" value="$(find trainer)/trained_models/sac_eval"/>
+  <node name="drone_sim" pkg="unity_bridge" type="RL_Drone.x86_64"/>
+  <node name="error_viz" pkg="error_viz" type="visualizer.py"/>
+  <node name="unity_drone_state" pkg="unity_bridge" type="unity_tcp_communication.py" output="screen"/>
+  <node name="trainer" pkg="trainer" type="train.py" output="screen"/>
+  <node name="inference" pkg="trainer" type="enjoy.py" output="screen"/>
+
+</launch>
